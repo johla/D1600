@@ -1,5 +1,14 @@
 # Objectives and constraints
 
+## Frozen generic demonstration envelope
+
+`inputs/design-envelope.yaml` is frozen for the generic C1 computational
+demonstration. Its dimensions, flow points, particle classes, weights, head-loss
+limit and access constraints are assumptions chosen for an interrogable
+non-proprietary experiment. They are not approved MFT product inputs or
+performance claims. Any later protected/product envelope creates a new study
+revision and invalidates direct reuse of these rankings.
+
 ## Multi-objective formulation
 
 The runtime must preserve a Pareto set rather than collapse the problem prematurely into one opaque score.

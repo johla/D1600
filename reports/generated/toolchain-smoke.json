@@ -1,0 +1,55 @@
+{
+  "claim_class": "review_result",
+  "platform": "Linux-6.17.0-1018-azure-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "python_packages": {
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "pandas": "3.0.3",
+    "matplotlib": "3.11.0",
+    "yaml": "6.0.1"
+  },
+  "checks": {
+    "gmsh": {
+      "command": [
+        "gmsh",
+        "--version"
+      ],
+      "return_code": 0,
+      "version": "4.12.1",
+      "passed": true
+    },
+    "openfoam": {
+      "command": [
+        "bash",
+        "-lc",
+        "source /usr/share/openfoam/etc/bashrc >/dev/null 2>&1 || true; simpleFoam -help"
+      ],
+      "return_code": 0,
+      "version": "1912.200626-2build3",
+      "passed": true
+    },
+    "paraview": {
+      "command": [
+        "xvfb-run",
+        "-a",
+        "paraview",
+        "--version"
+      ],
+      "return_code": 0,
+      "version": "5.11.2",
+      "passed": true
+    },
+    "gmsh_mesh_smoke": {
+      "return_code": 0,
+      "mesh_bytes": 735115,
+      "passed": true
+    }
+  },
+  "negative_control": {
+    "method": "malformed Gmsh input must return nonzero",
+    "failure_detected": true,
+    "restoration_verified": true
+  },
+  "passed": true
+}

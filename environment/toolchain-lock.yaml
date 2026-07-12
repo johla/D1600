@@ -1,14 +1,19 @@
-status: unresolved_C1_02
+status: pinned_generic_c1_environment
+platform:
+  distribution: Ubuntu 24.04
+  architecture: amd64
 python:
-  minimum: '3.11'
-  required_packages: [numpy, scipy, pandas, matplotlib, pyyaml]
+  version: '3.12.3'
+  requirements: requirements.txt
 cfd:
-  openfoam_distribution: TBD
-  openfoam_version: TBD
+  openfoam_distribution: Debian/Ubuntu OpenFOAM package
+  openfoam_version: 1912.200626-2build3
 meshing:
-  gmsh_version: TBD
+  gmsh_version: 4.12.1+ds1-1.1build2
 postprocessing:
-  paraview_version: TBD
-container:
-  image: TBD
-  digest: TBD
+  paraview_version: 5.11.2+dfsg-6build5
+system_install:
+  command: sudo apt-get install --no-install-recommends gmsh=4.12.1+ds1-1.1build2 openfoam=1912.200626-2build3 paraview=5.11.2+dfsg-6build5
+verification:
+  command: make toolchain-smoke
+  output: reports/generated/toolchain-smoke.json

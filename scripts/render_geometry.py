@@ -10,6 +10,11 @@ params={'chamber_diameter':c['internal_diameter_m'],'water_depth':c['water_depth
         'outlet_z':c['outlet_center_elevation_m'],'pipe_length':0.6,'mesh_min':0.02,'mesh_max':0.12}
 t=Template((root/'geometry/gmsh/generic_d1600.geo.template').read_text())
 out=root/'geometry/generated/baseline-d1600.geo'; out.write_text(t.substitute(params))
-contract={'status':'generated_geometry_seed_not_yet_gmsh_validated','parameters':params,'source':'inputs/design-envelope.yaml'}
+contract={
+    'status':'generated_geometry_with_solver_boundary_contract',
+    'parameters':params,
+    'physical_groups':{'volumes':['fluid'],'surfaces':['inlet','outlet','walls']},
+    'source':'inputs/design-envelope.yaml',
+}
 (root/'geometry/generated/geometry-contract.json').write_text(json.dumps(contract,indent=2)+'\n')
 print(out)

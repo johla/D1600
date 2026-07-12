@@ -16,6 +16,19 @@ Cylinder(2) = {-D/2-Lpipe, 0, Zin, Lpipe + D/2, 0, 0, Din/2};
 Cylinder(3) = {0, 0, Zout, D/2+Lpipe, 0, 0, Dout/2};
 BooleanUnion{ Volume{1}; Delete; }{ Volume{2,3}; Delete; }
 
+// Disjoint boundary groups form the geometry-to-solver contract.
+eps = 1e-5;
+inlet[] = Surface In BoundingBox {-D/2-Lpipe-eps, -Din/2-eps, Zin-Din/2-eps,
+                                  -D/2-Lpipe+eps, Din/2+eps, Zin+Din/2+eps};
+outlet[] = Surface In BoundingBox {D/2+Lpipe-eps, -Dout/2-eps, Zout-Dout/2-eps,
+                                   D/2+Lpipe+eps, Dout/2+eps, Zout+Dout/2+eps};
+walls[] = Boundary { Volume{1}; };
+walls[] -= {inlet[], outlet[]};
+Physical Volume("fluid") = {1};
+Physical Surface("inlet") = {inlet[]};
+Physical Surface("outlet") = {outlet[]};
+Physical Surface("walls") = {walls[]};
+
 // Candidate internals are subtracted from the fluid domain by generated design-specific scripts.
 Mesh.CharacteristicLengthMin = 0.02;
 Mesh.CharacteristicLengthMax = 0.12;
