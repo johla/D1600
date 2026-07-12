@@ -1,0 +1,16 @@
+{
+  "status": "generated_geometry_seed_not_yet_gmsh_validated",
+  "parameters": {
+    "chamber_diameter": 1.6,
+    "water_depth": 2.0,
+    "sump_depth": 0.5,
+    "inlet_diameter": 0.3,
+    "outlet_diameter": 0.3,
+    "inlet_z": 1.5,
+    "outlet_z": 1.5,
+    "pipe_length": 0.6,
+    "mesh_min": 0.02,
+    "mesh_max": 0.12
+  },
+  "source": "inputs/design-envelope.yaml"
+}

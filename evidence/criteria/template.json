@@ -1,0 +1,12 @@
+{
+  "criterion_id": "C1-XX",
+  "status": "pass",
+  "release_revision": "commit or release ID",
+  "summary": "Exact proposition proven",
+  "evidence_paths": [],
+  "verifications": [{"method":"command/review","result":"pass","output_path":"retained output"}],
+  "negative_control": {"required":false,"method":"","observed_failure":"","restoration_verified":false},
+  "independent_review": {"required":true,"reviewer":"separate run/person","review_path":"","open_critical":0,"open_high":0},
+  "assumptions": [],
+  "residual_noncritical_risks": []
+}

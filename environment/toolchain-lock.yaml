@@ -1,0 +1,14 @@
+status: unresolved_C1_02
+python:
+  minimum: '3.11'
+  required_packages: [numpy, scipy, pandas, matplotlib, pyyaml]
+cfd:
+  openfoam_distribution: TBD
+  openfoam_version: TBD
+meshing:
+  gmsh_version: TBD
+postprocessing:
+  paraview_version: TBD
+container:
+  image: TBD
+  digest: TBD

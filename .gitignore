@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+cfd/cases/*/postProcessing/
+cfd/cases/*/processor*/
+cfd/cases/*/[1-9]*/
+reports/generated/animations/*.mp4
+inputs/private/*
+!inputs/private/README.md
