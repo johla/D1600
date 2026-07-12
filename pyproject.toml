@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mft-d1600-autonomous-separator"
+version = "0.1.0"
+description = "Agentic CFD bootstrap for a passive D1600 stormwater particle separator"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy==2.5.1",
+  "scipy==1.18.0",
+  "pandas==3.0.3",
+  "matplotlib==3.11.0",
+  "pyyaml==6.0.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

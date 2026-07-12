@@ -1,0 +1,41 @@
+project: mft-d1600-autonomous-separator
+status: frozen_generic_c1_demo_not_product_claims
+chamber:
+  internal_diameter_m: 1.600
+  water_depth_m: 2.000
+  sump_depth_m: 0.500
+  inlet_diameter_m: 0.300
+  outlet_diameter_m: 0.300
+  inlet_center_elevation_m: 1.500
+  outlet_center_elevation_m: 1.500
+hydraulics:
+  flow_points_lps: [10, 20, 40, 80]
+  overload_flow_lps: 120
+  max_head_loss_m: 0.150
+fluid:
+  density_kg_m3: 998.0
+  kinematic_viscosity_m2_s: 1.004e-6
+  gravity_m_s2: 9.81
+  nominal_temperature_c: 15.0
+particles:
+  density_kg_m3: 2650.0
+  diameters_um: [40, 63, 100, 250]
+  weighting: [0.10, 0.40, 0.30, 0.20]
+  shape_assumption: spherical_noncohesive
+constraints:
+  passive_only: true
+  powered_components_allowed: false
+  disposable_filter_media_allowed: false
+  minimum_cleaning_access_m: 0.400
+  minimum_internal_gap_m: 0.075
+  inside_d1600_envelope: true
+objectives:
+  maximize: [weighted_capture, overload_retention_proxy, maintainability]
+  minimize: [head_loss, short_circuiting, geometric_complexity]
+  flow_weighting: equal
+evidence_thresholds:
+  steady_mass_imbalance_percent: 0.5
+  monitored_integral_drift_percent: 1.0
+  mesh_integral_change_percent: 5.0
+  particle_accounting_percent: 99.5
+  repeated_particle_efficiency_absolute_percent: 3.0

@@ -1,0 +1,36 @@
+{
+  "model_class": "reduced_order_screening_not_CFD",
+  "sampled_designs": 2000,
+  "feasible_designs": 339,
+  "pareto_designs": 55,
+  "baseline": {
+    "design_id": 0,
+    "tangentiality": 0.0,
+    "center_baffle_ratio": 0.05,
+    "shield_ratio": 0.2,
+    "shield_gap_ratio": 0.2,
+    "outlet_submergence_ratio": 0.05,
+    "flow_distribution": 0.3,
+    "complexity": 0.0,
+    "weighted_capture_proxy": 0.1525859450556277,
+    "head_loss_proxy_m": 0.036037550755379455,
+    "overload_sediment_risk_proxy": 4.0,
+    "maintainability_proxy": 0.8000000000000002,
+    "feasible": true
+  },
+  "screened_candidate": {
+    "design_id": 1596,
+    "tangentiality": 0.295581700198706,
+    "center_baffle_ratio": 0.3891971747983536,
+    "shield_ratio": 0.35601232273913996,
+    "shield_gap_ratio": 0.09171101621190328,
+    "outlet_submergence_ratio": 0.3664177563568664,
+    "flow_distribution": 0.9235551574201024,
+    "complexity": 0.008839308928256684,
+    "weighted_capture_proxy": 0.46817715645368846,
+    "head_loss_proxy_m": 0.053325749503936155,
+    "overload_sediment_risk_proxy": 4.0,
+    "maintainability_proxy": 0.64398767726086,
+    "feasible": true
+  }
+}

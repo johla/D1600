@@ -1,0 +1,44 @@
+{
+  "criterion_id": "C1-01",
+  "status": "pass",
+  "release_revision": "f4f7ca7c3e4be0f35c3df83afc6cf3749e04b5d4",
+  "summary": "The machine-readable envelope is frozen for a generic, non-product C1 demonstration with explicit assumptions, objectives, constraints and evidence thresholds.",
+  "evidence_paths": [
+    "inputs/design-envelope.yaml",
+    "docs/objectives-and-constraints.md",
+    "reviews/design-envelope-audit.md"
+  ],
+  "verifications": [
+    {
+      "method": "PYTHONPATH=src python -m unittest tests.test_design_envelope",
+      "result": "pass",
+      "output_path": "tests/test_design_envelope.py"
+    },
+    {
+      "method": "independent envelope consistency and claim-scope audit",
+      "result": "pass",
+      "output_path": "reviews/design-envelope-audit.md"
+    }
+  ],
+  "negative_control": {
+    "required": false,
+    "method": "",
+    "observed_failure": "",
+    "restoration_verified": false
+  },
+  "independent_review": {
+    "required": true,
+    "reviewer": "independent repository-analysis run",
+    "review_path": "reviews/design-envelope-audit.md",
+    "open_critical": 0,
+    "open_high": 0
+  },
+  "assumptions": [
+    "Values describe a generic D1600 demonstration, not an MFT product.",
+    "Particles are spherical, noncohesive and represented by four discrete classes.",
+    "Normal-flow operating points receive equal objective weighting."
+  ],
+  "residual_noncritical_risks": [
+    "Protected product geometry, flows and fabrication rules may invalidate rankings and require a new revision."
+  ]
+}

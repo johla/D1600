@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "project": "mft-d1600-autonomous-separator",
+  "terminal_state": "C1_DEMO_READY",
+  "allowed_status": [
+    "missing",
+    "active",
+    "blocked",
+    "pass"
+  ],
+  "criteria": [
+    {
+      "id": "C1-01",
+      "name": "Design envelope frozen",
+      "status": "pass",
+      "evidence": [
+        "inputs/design-envelope.yaml",
+        "docs/objectives-and-constraints.md",
+        "reviews/design-envelope-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-01.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-02",
+      "name": "Reproducible toolchain",
+      "status": "pass",
+      "evidence": [
+        "environment/README.md",
+        "environment/toolchain-lock.yaml",
+        "reports/generated/toolchain-smoke.json"
+      ],
+      "evidence_record": "evidence/criteria/C1-02.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-03",
+      "name": "Parametric geometry valid",
+      "status": "active",
+      "evidence": [
+        "geometry/generated/baseline-d1600.geo",
+        "geometry/generated/geometry-contract.json",
+        "reports/generated/geometry-validation.json",
+        "reviews/geometry-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-03.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-04",
+      "name": "Mesh strategy verified",
+      "status": "active",
+      "evidence": [
+        "cfd/mesh-strategy.md",
+        "reports/generated/mesh-quality.csv",
+        "reports/generated/mesh-independence.md",
+        "reviews/mesh-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-04.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-05",
+      "name": "Baseline hydraulics verified",
+      "status": "missing",
+      "evidence": [
+        "reports/generated/baseline-hydraulics.csv",
+        "reports/generated/convergence-mass-balance.md",
+        "reports/generated/hydraulic-metrics.json",
+        "reviews/baseline-cfd-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-05.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-06",
+      "name": "Particle model verified",
+      "status": "missing",
+      "evidence": [
+        "cfd/particle-model.md",
+        "reports/generated/particle-accounting.csv",
+        "reports/generated/particle-sensitivity.md",
+        "reviews/particle-model-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-06.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-07",
+      "name": "Grade-efficiency envelope complete",
+      "status": "missing",
+      "evidence": [
+        "reports/generated/grade-efficiency.csv",
+        "reports/generated/grade-efficiency.png",
+        "reports/generated/grade-efficiency-analysis.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-07.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-08",
+      "name": "Overload and sediment security assessed",
+      "status": "missing",
+      "evidence": [
+        "reports/generated/overload-security.csv",
+        "reports/generated/sediment-security.md",
+        "reviews/overload-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-08.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-09",
+      "name": "Mesh/model sensitivity passed",
+      "status": "missing",
+      "evidence": [
+        "reports/generated/sensitivity-matrix.csv",
+        "reports/generated/sensitivity-conclusion.md",
+        "reviews/sensitivity-red-team.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-09.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-10",
+      "name": "Agentic experiment runtime verified",
+      "status": "active",
+      "evidence": [
+        "optimization/experiment-registry.jsonl",
+        "reports/generated/runtime-verification.json",
+        "reviews/runtime-red-team.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-10.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-11",
+      "name": "Multi-objective search complete",
+      "status": "active",
+      "evidence": [
+        "optimization/results.csv",
+        "reports/generated/pareto-front.csv",
+        "reports/generated/pareto-front.png",
+        "reports/generated/candidate-selection.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-11.json",
+      "requires_independent_review": true,
+      "requires_negative_control": true
+    },
+    {
+      "id": "C1-12",
+      "name": "Maintainability/manufacturability enforced",
+      "status": "missing",
+      "evidence": [
+        "docs/manufacturing-maintenance-constraints.md",
+        "reports/generated/constraint-audit.csv",
+        "reviews/product-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-12.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-13",
+      "name": "Visual/report artifacts reproducible",
+      "status": "missing",
+      "evidence": [
+        "reports/generated/engineering-report.md",
+        "reports/generated/visualization-manifest.json",
+        "reports/generated/animations"
+      ],
+      "evidence_record": "evidence/criteria/C1-13.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-14",
+      "name": "Physical validation plan complete",
+      "status": "active",
+      "evidence": [
+        "validation/hydraulic-test-plan.md",
+        "validation/instrumentation-and-sampling.md",
+        "reviews/validation-plan-audit.md"
+      ],
+      "evidence_record": "evidence/criteria/C1-14.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-15",
+      "name": "Final adversarial audit passed",
+      "status": "missing",
+      "evidence": [
+        "reviews/final-red-team.md",
+        "reviews/finding-disposition.csv"
+      ],
+      "evidence_record": "evidence/criteria/C1-15.json",
+      "requires_independent_review": true,
+      "requires_negative_control": false
+    },
+    {
+      "id": "C1-16",
+      "name": "Immutable release assembled",
+      "status": "missing",
+      "evidence": [
+        "release-manifest.json"
+      ],
+      "evidence_record": "evidence/criteria/C1-16.json",
+      "requires_independent_review": false,
+      "requires_negative_control": false
+    }
+  ]
+}
