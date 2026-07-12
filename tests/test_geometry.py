@@ -6,6 +6,7 @@ import unittest
 import numpy as np
 
 from scripts.render_geometry_3d import load_dimensions, render
+from scripts.render_cfd_decision_support import load_case, render_all
 from scripts.validate_geometry import connected_tetra_components, tetra_quality
 
 
@@ -45,6 +46,24 @@ class GeometryMetricTests(unittest.TestCase):
             render(output, dpi=40)
             self.assertTrue(output.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"))
             self.assertGreater(output.stat().st_size, 10_000)
+
+    def test_decision_support_case_uses_frozen_inputs(self):
+        root = Path(__file__).resolve().parents[1]
+        case = load_case(
+            root / "inputs/design-envelope.yaml",
+            root / "data/surrogate/grade-efficiency-proxy.csv",
+            40,
+        )
+        self.assertAlmostEqual(case["inlet_velocity_m_s"], 0.5659, places=4)
+        self.assertEqual([row["diameter_um"] for row in case["particles"]], [40, 63, 100, 250])
+
+    def test_decision_support_renders_write_nonempty_pngs(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            outputs = render_all(Path(temporary_directory), flow_lps=40, dpi=35)
+            self.assertEqual(len(outputs), 2)
+            for output in outputs:
+                self.assertTrue(output.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"))
+                self.assertGreater(output.stat().st_size, 10_000)
 
 
 if __name__ == "__main__":
