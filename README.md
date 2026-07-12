@@ -49,9 +49,14 @@ The repository contains a clearly labelled **reduced-order screening model**, no
 ```bash
 make check
 make surrogate
+make geometry-render
 make status
 make demo-gate
 ```
+
+`make geometry-render` creates a high-resolution transparent cutaway at
+`reports/generated/baseline-geometry-3d.png`. The image is generated directly
+from `inputs/design-envelope.yaml`, so updated dimensions remain reproducible.
 
 `make demo-gate` initially fails with the exact computational evidence still required. That failure is the agent's project work queue, not a stopping state.
 

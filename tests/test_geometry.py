@@ -1,8 +1,11 @@
 import math
+from pathlib import Path
+import tempfile
 import unittest
 
 import numpy as np
 
+from scripts.render_geometry_3d import load_dimensions, render
 from scripts.validate_geometry import connected_tetra_components, tetra_quality
 
 
@@ -27,6 +30,20 @@ class GeometryMetricTests(unittest.TestCase):
     def test_disconnected_tetrahedra_are_detected(self):
         tetrahedra = [[1, 2, 3, 4], [4, 5, 6, 7], [8, 9, 10, 11]]
         self.assertEqual(connected_tetra_components(tetrahedra), 2)
+
+    def test_render_dimensions_follow_design_envelope(self):
+        root = Path(__file__).resolve().parents[1]
+        dimensions = load_dimensions(root / "inputs/design-envelope.yaml")
+        self.assertEqual(dimensions["radius"], 0.8)
+        self.assertEqual(dimensions["bottom"], -0.5)
+        self.assertEqual(dimensions["top"], 2.0)
+
+    def test_render_writes_nonempty_png(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "render.png"
+            render(output, dpi=40)
+            self.assertTrue(output.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"))
+            self.assertGreater(output.stat().st_size, 10_000)
 
 
 if __name__ == "__main__":
