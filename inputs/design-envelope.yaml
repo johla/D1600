@@ -6,6 +6,7 @@ chamber:
   sump_depth_m: 0.500
   inlet_diameter_m: 0.300
   outlet_diameter_m: 0.300
+  pipe_length_m: 0.600
   inlet_center_elevation_m: 1.500
   outlet_center_elevation_m: 1.500
 hydraulics:
