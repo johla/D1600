@@ -3,7 +3,7 @@ import unittest
 
 import numpy as np
 
-from scripts.validate_geometry import tetra_quality
+from scripts.validate_geometry import connected_tetra_components, tetra_quality
 
 
 class GeometryMetricTests(unittest.TestCase):
@@ -23,6 +23,10 @@ class GeometryMetricTests(unittest.TestCase):
         volume, quality = tetra_quality(points)
         self.assertEqual(volume, 0)
         self.assertEqual(quality, 0)
+
+    def test_disconnected_tetrahedra_are_detected(self):
+        tetrahedra = [[1, 2, 3, 4], [4, 5, 6, 7], [8, 9, 10, 11]]
+        self.assertEqual(connected_tetra_components(tetrahedra), 2)
 
 
 if __name__ == "__main__":

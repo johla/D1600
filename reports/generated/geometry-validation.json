@@ -8,6 +8,7 @@
       "mesh_max_m": 0.18,
       "nodes": 1234,
       "tetrahedra": 5052,
+      "connected_volume_components": 1,
       "total_volume_m3": 5.075232074766447,
       "minimum_cell_volume_m3": 0.00012842122557720845,
       "minimum_mean_ratio_quality": 0.40165698582055714,
@@ -26,6 +27,7 @@
       "mesh_max_m": 0.12,
       "nodes": 3120,
       "tetrahedra": 14287,
+      "connected_volume_components": 1,
       "total_volume_m3": 5.092086616256979,
       "minimum_cell_volume_m3": 7.09390362431206e-05,
       "minimum_mean_ratio_quality": 0.400929984957118,
@@ -44,6 +46,7 @@
       "mesh_max_m": 0.09,
       "nodes": 6919,
       "tetrahedra": 34173,
+      "connected_volume_components": 1,
       "total_volume_m3": 5.101251960232183,
       "minimum_cell_volume_m3": 3.488116694160347e-05,
       "minimum_mean_ratio_quality": 0.4072211501757027,
@@ -63,9 +66,11 @@
     "boundary_partition": true,
     "geometry_bounds_within_1_micrometre": true,
     "positive_cell_volumes": true,
+    "single_connected_fluid_volume": true,
     "volume_within_analytical_boolean_bounds": true,
     "medium_to_fine_volume_change_below_0.25_percent": true,
     "malformed_geometry_rejected": true,
+    "disconnected_geometry_detected": true,
     "valid_geometry_restored": true
   },
   "analytical_volume_bounds_m3": [
@@ -74,8 +79,9 @@
   ],
   "medium_to_fine_volume_relative_change": 0.0017966852150519982,
   "negative_control": {
-    "method": "malformed OpenCASCADE cylinder input",
+    "method": "malformed syntax rejection and parseable two-volume disconnection detection",
     "rejected": true,
+    "disconnected_components_observed": 2,
     "restoration_verified": true
   },
   "passed": true

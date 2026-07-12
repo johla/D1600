@@ -67,6 +67,26 @@ def tetra_quality(points: np.ndarray) -> tuple[float, float]:
     return volume, quality
 
 
+def connected_tetra_components(tetrahedra: list[list[int]]) -> int:
+    parent: dict[int, int] = {}
+
+    def find(node: int) -> int:
+        parent.setdefault(node, node)
+        if parent[node] != node:
+            parent[node] = find(parent[node])
+        return parent[node]
+
+    def union(left: int, right: int) -> None:
+        left_root, right_root = find(left), find(right)
+        if left_root != right_root:
+            parent[right_root] = left_root
+
+    for tetrahedron in tetrahedra:
+        for node in tetrahedron[1:]:
+            union(tetrahedron[0], node)
+    return len({find(node) for node in parent})
+
+
 def render(level: str, mesh_min: float, mesh_max: float, directory: Path) -> dict:
     envelope = yaml.safe_load((ROOT / "inputs/design-envelope.yaml").read_text())
     chamber = envelope["chamber"]
@@ -114,6 +134,7 @@ def render(level: str, mesh_min: float, mesh_max: float, directory: Path) -> dic
         "mesh_max_m": mesh_max,
         "nodes": len(nodes),
         "tetrahedra": len(tetrahedra),
+        "connected_volume_components": connected_tetra_components(tetrahedra),
         "total_volume_m3": float(volumes.sum()),
         "minimum_cell_volume_m3": float(volumes.min()),
         "minimum_mean_ratio_quality": float(qualities.min()),
@@ -178,6 +199,26 @@ def main() -> None:
             ["gmsh", str(invalid), "-3", "-format", "msh2", "-o", str(directory / "invalid.msh")],
             text=True, capture_output=True, timeout=30,
         )
+        disconnected = directory / "disconnected.geo"
+        disconnected.write_text(
+            'SetFactory("OpenCASCADE");\n'
+            'Box(1) = {0, 0, 0, 1, 1, 1};\n'
+            'Box(2) = {2, 0, 0, 1, 1, 1};\n'
+            'Physical Volume("fluid") = {1, 2};\n'
+            'walls[] = Boundary { Volume{1, 2}; };\n'
+            'Physical Surface("walls") = {walls[]};\n'
+        )
+        disconnected_mesh = directory / "disconnected.msh"
+        disconnected_result = subprocess.run(
+            ["gmsh", str(disconnected), "-3", "-format", "msh2",
+             "-o", str(disconnected_mesh)],
+            text=True, capture_output=True, timeout=30,
+        )
+        _, disconnected_elements, _ = read_msh2(disconnected_mesh)
+        disconnected_tetrahedra = [
+            element for kind, _, element in disconnected_elements if kind == 4
+        ]
+        disconnected_components = connected_tetra_components(disconnected_tetrahedra)
 
     with (OUT / "mesh-quality.csv").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=rows[0].keys())
@@ -207,18 +248,25 @@ def main() -> None:
                 row["bounds_maximum_error_m"] < 1e-6 for row in rows
             ),
             "positive_cell_volumes": all(row["positive_volume_pass"] for row in rows),
+            "single_connected_fluid_volume": all(
+                row["connected_volume_components"] == 1 for row in rows
+            ),
             "volume_within_analytical_boolean_bounds": all(
                 chamber_volume < row["total_volume_m3"] < untrimmed_volume for row in rows
             ),
             "medium_to_fine_volume_change_below_0.25_percent": refinement_change < 0.0025,
             "malformed_geometry_rejected": negative.returncode != 0,
+            "disconnected_geometry_detected": (
+                disconnected_result.returncode == 0 and disconnected_components > 1
+            ),
             "valid_geometry_restored": rows[-1]["tetrahedra"] > 0,
         },
         "analytical_volume_bounds_m3": [chamber_volume, untrimmed_volume],
         "medium_to_fine_volume_relative_change": refinement_change,
         "negative_control": {
-            "method": "malformed OpenCASCADE cylinder input",
+            "method": "malformed syntax rejection and parseable two-volume disconnection detection",
             "rejected": negative.returncode != 0,
+            "disconnected_components_observed": disconnected_components,
             "restoration_verified": rows[-1]["tetrahedra"] > 0,
         },
     }

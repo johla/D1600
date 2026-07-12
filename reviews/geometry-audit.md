@@ -25,8 +25,8 @@ not yet prove the full C1-03 proposition.
   regression-tested when topology changes.
 - Pipe length and mesh size are generic study assumptions rather than approved
   product values.
-- The malformed-syntax negative control does not falsify a disconnected or
-  non-manifold geometry.
+- The negative control now detects a syntactically valid two-volume
+  disconnection; a non-manifold-solid control remains future work.
 - Mesh quality and volume convergence do not establish hydraulic
   mesh-independence.
 
