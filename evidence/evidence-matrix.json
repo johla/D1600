@@ -12,7 +12,7 @@
     {
       "id": "C1-01",
       "name": "Design envelope frozen",
-      "status": "active",
+      "status": "pass",
       "evidence": [
         "inputs/design-envelope.yaml",
         "docs/objectives-and-constraints.md",
@@ -25,7 +25,7 @@
     {
       "id": "C1-02",
       "name": "Reproducible toolchain",
-      "status": "active",
+      "status": "pass",
       "evidence": [
         "environment/README.md",
         "environment/toolchain-lock.yaml",

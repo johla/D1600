@@ -1,0 +1,43 @@
+{
+  "criterion_id": "C1-02",
+  "status": "pass",
+  "release_revision": "f4f7ca7c3e4be0f35c3df83afc6cf3749e04b5d4",
+  "summary": "Exact Ubuntu package and Python dependency versions are pinned and executable smoke tests cover meshing, solver CLI loading, post-processing startup and failure detection.",
+  "evidence_paths": [
+    "environment/README.md",
+    "environment/toolchain-lock.yaml",
+    "reports/generated/toolchain-smoke.json",
+    "reviews/toolchain-audit.md"
+  ],
+  "verifications": [
+    {
+      "method": "make toolchain-smoke",
+      "result": "pass",
+      "output_path": "reports/generated/toolchain-smoke.json"
+    },
+    {
+      "method": "independent lock and smoke-evidence audit",
+      "result": "pass",
+      "output_path": "reviews/toolchain-audit.md"
+    }
+  ],
+  "negative_control": {
+    "required": true,
+    "method": "malformed Gmsh input must return nonzero before a valid mesh is regenerated",
+    "observed_failure": "malformed geometry rejected",
+    "restoration_verified": true
+  },
+  "independent_review": {
+    "required": true,
+    "reviewer": "independent repository-analysis run",
+    "review_path": "reviews/toolchain-audit.md",
+    "open_critical": 0,
+    "open_high": 0
+  },
+  "assumptions": [
+    "Ubuntu 24.04 amd64 package repositories retain the pinned versions."
+  ],
+  "residual_noncritical_risks": [
+    "The apt route is pinned by version rather than an immutable container digest."
+  ]
+}
