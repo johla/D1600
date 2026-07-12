@@ -50,6 +50,7 @@ The repository contains a clearly labelled **reduced-order screening model**, no
 make check
 make surrogate
 make geometry-render
+make cfd-renders
 make status
 make demo-gate
 ```
@@ -57,6 +58,14 @@ make demo-gate
 `make geometry-render` creates a high-resolution transparent cutaway at
 `reports/generated/baseline-geometry-3d.png`. The image is generated directly
 from `inputs/design-envelope.yaml`, so updated dimensions remain reproducible.
+
+`make cfd-renders` adds two annotated, presentation-quality 3D decision-support
+views at `reports/generated/cfd-*-preview-3d.png`. They combine the frozen
+geometry, operating envelope, and reduced-order particle screening data. The
+figures are deliberately marked as **pre-CFD analytical visualizations**: they
+identify inlet-jet, short-circuiting, sump-shear, pressure-loss, and
+particle-accounting questions for subsequent solver runs, but are not CFD or
+product-performance evidence.
 
 `make demo-gate` initially fails with the exact computational evidence still required. That failure is the agent's project work queue, not a stopping state.
 

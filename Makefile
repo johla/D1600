@@ -1,4 +1,4 @@
-.PHONY: surrogate geometry geometry-render geometry-validate toolchain-smoke test check status demo-gate
+.PHONY: surrogate geometry geometry-render cfd-renders geometry-validate toolchain-smoke test check status demo-gate
 
 surrogate:
 	PYTHONPATH=src python src/mft_d1600/run_surrogate.py
@@ -8,6 +8,9 @@ geometry:
 
 geometry-render: geometry
 	python scripts/render_geometry_3d.py
+
+cfd-renders: surrogate geometry-render
+	python scripts/render_cfd_decision_support.py
 
 geometry-validate: geometry
 	python scripts/validate_geometry.py
