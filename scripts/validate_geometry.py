@@ -98,7 +98,7 @@ def render(level: str, mesh_min: float, mesh_max: float, directory: Path) -> dic
         "outlet_diameter": chamber["outlet_diameter_m"],
         "inlet_z": chamber["inlet_center_elevation_m"],
         "outlet_z": chamber["outlet_center_elevation_m"],
-        "pipe_length": 0.6,
+        "pipe_length": chamber["pipe_length_m"],
         "mesh_min": mesh_min,
         "mesh_max": mesh_max,
     }
@@ -126,7 +126,8 @@ def render(level: str, mesh_min: float, mesh_max: float, directory: Path) -> dic
         surface_areas[physical_names[tag]] += float(area)
     expected_groups = {"fluid", "inlet", "outlet", "walls"}
     coordinates = np.stack(list(nodes.values()))
-    expected_bounds = np.array([[-1.4, -0.8, -0.5], [1.4, 0.8, 2.0]])
+    extent = chamber["internal_diameter_m"] / 2 + chamber["pipe_length_m"]
+    expected_bounds = np.array([[-extent, -0.8, -0.5], [extent, 0.8, 2.0]])
     observed_bounds = np.stack([coordinates.min(axis=0), coordinates.max(axis=0)])
     return {
         "level": level,
@@ -231,7 +232,8 @@ def main() -> None:
         * (envelope["chamber"]["water_depth_m"] + envelope["chamber"]["sump_depth_m"])
     )
     untrimmed_volume = chamber_volume + (
-        2 * math.pi * (envelope["chamber"]["inlet_diameter_m"] / 2) ** 2 * 0.6
+        2 * math.pi * (envelope["chamber"]["inlet_diameter_m"] / 2) ** 2
+        * envelope["chamber"]["pipe_length_m"]
     )
     refinement_change = abs(
         rows[-1]["total_volume_m3"] - rows[-2]["total_volume_m3"]

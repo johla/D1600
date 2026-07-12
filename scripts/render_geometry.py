@@ -7,7 +7,7 @@ env=yaml.safe_load((root/'inputs/design-envelope.yaml').read_text())
 c=env['chamber']
 params={'chamber_diameter':c['internal_diameter_m'],'water_depth':c['water_depth_m'],'sump_depth':c['sump_depth_m'],
         'inlet_diameter':c['inlet_diameter_m'],'outlet_diameter':c['outlet_diameter_m'],'inlet_z':c['inlet_center_elevation_m'],
-        'outlet_z':c['outlet_center_elevation_m'],'pipe_length':0.6,'mesh_min':0.02,'mesh_max':0.12}
+        'outlet_z':c['outlet_center_elevation_m'],'pipe_length':c['pipe_length_m'],'mesh_min':0.02,'mesh_max':0.12}
 t=Template((root/'geometry/gmsh/generic_d1600.geo.template').read_text())
 out=root/'geometry/generated/baseline-d1600.geo'; out.write_text(t.substitute(params))
 contract={

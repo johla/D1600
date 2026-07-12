@@ -37,6 +37,7 @@ class GeometryMetricTests(unittest.TestCase):
         self.assertEqual(dimensions["radius"], 0.8)
         self.assertEqual(dimensions["bottom"], -0.5)
         self.assertEqual(dimensions["top"], 2.0)
+        self.assertEqual(dimensions["pipe_length"], 0.6)
 
     def test_render_writes_nonempty_png(self):
         with tempfile.TemporaryDirectory() as temporary_directory:

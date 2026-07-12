@@ -28,7 +28,7 @@ def load_dimensions(path: Path) -> dict[str, float]:
         "pipe_radius": chamber["inlet_diameter_m"] / 2,
         "inlet_z": chamber["inlet_center_elevation_m"],
         "outlet_z": chamber["outlet_center_elevation_m"],
-        "pipe_length": 0.6,
+        "pipe_length": chamber["pipe_length_m"],
     }
 
 
@@ -57,7 +57,8 @@ def _style_axis(axis, dimensions: dict[str, float]) -> None:
         ylim=(-limit, limit),
         zlim=(dimensions["bottom"] - 0.08, dimensions["top"] + 0.18),
     )
-    axis.set_box_aspect((2 * limit, 2 * limit, dimensions["top"] - dimensions["bottom"]))
+    vertical_range = dimensions["top"] - dimensions["bottom"] + 0.26
+    axis.set_box_aspect((2 * limit, 2 * limit, vertical_range))
     axis.set_axis_off()
     axis.set_proj_type("persp", focal_length=0.9)
     axis.view_init(elev=23, azim=-58)
