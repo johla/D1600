@@ -5,10 +5,8 @@ import csv
 from collections import Counter
 import json
 import math
-import re
 import subprocess
 import tempfile
-import time
 from pathlib import Path
 from string import Template
 
@@ -88,12 +86,10 @@ def render(level: str, mesh_min: float, mesh_max: float, directory: Path) -> dic
     mesh = directory / f"{level}.msh"
     template = Template((ROOT / "geometry/gmsh/generic_d1600.geo.template").read_text())
     geometry.write_text(template.substitute(params))
-    started = time.monotonic()
     process = subprocess.run(
         ["gmsh", str(geometry), "-3", "-format", "msh2", "-o", str(mesh)],
         text=True, capture_output=True, timeout=180,
     )
-    elapsed = time.monotonic() - started
     if process.returncode:
         raise RuntimeError(process.stdout + process.stderr)
     nodes, elements, physical_names = read_msh2(mesh)
@@ -136,7 +132,6 @@ def render(level: str, mesh_min: float, mesh_max: float, directory: Path) -> dic
         ),
         "bounds_maximum_error_m": float(np.max(np.abs(observed_bounds - expected_bounds))),
         "positive_volume_pass": bool(np.all(volumes > 0)),
-        "elapsed_s": elapsed,
     }
 
 

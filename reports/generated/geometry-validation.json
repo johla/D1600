@@ -18,8 +18,7 @@
       "physical_groups_pass": true,
       "boundary_partition_pass": true,
       "bounds_maximum_error_m": 0.0,
-      "positive_volume_pass": true,
-      "elapsed_s": 0.18541709999999512
+      "positive_volume_pass": true
     },
     {
       "level": "medium",
@@ -37,8 +36,7 @@
       "physical_groups_pass": true,
       "boundary_partition_pass": true,
       "bounds_maximum_error_m": 5.662858402200044e-07,
-      "positive_volume_pass": true,
-      "elapsed_s": 0.3767428349997317
+      "positive_volume_pass": true
     },
     {
       "level": "fine",
@@ -56,8 +54,7 @@
       "physical_groups_pass": true,
       "boundary_partition_pass": true,
       "bounds_maximum_error_m": 0.0,
-      "positive_volume_pass": true,
-      "elapsed_s": 0.7408580160004021
+      "positive_volume_pass": true
     }
   ],
   "checks": {
