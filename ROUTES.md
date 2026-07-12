@@ -2,7 +2,7 @@
 
 | ID | Crux | Route | Mechanism | Principal risk | Verification | Status |
 |---|---|---|---|---|---|---|
-| R-01 | Geometry | Gmsh/OpenCASCADE parametric solids | scripted booleans and physical groups | fragile booleans/small gaps | geometry validity + mesh smoke tests | ACTIVE |
+| R-01 | Geometry | Gmsh/OpenCASCADE parametric solids | scripted booleans and physical groups | design family and topology audit remain open | baseline validity + three mesh levels pass; internals pending | ACTIVE |
 | R-02 | Geometry | CadQuery/OpenCASCADE | Python parametric CAD and STEP export | package availability/meshing handoff | containerized smoke test and STEP comparison | CANDIDATE |
 | R-03 | Flow | steady incompressible RANS baseline | economical design screening | misses unsteady vortex/short-circuit behavior | compare selected cases to transient URANS | ACTIVE |
 | R-04 | Flow | transient URANS throughout | resolves unsteadiness | expensive optimization loop | convergence/cost/value comparison | CANDIDATE |

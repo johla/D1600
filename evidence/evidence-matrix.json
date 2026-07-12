@@ -25,7 +25,7 @@
     {
       "id": "C1-02",
       "name": "Reproducible toolchain",
-      "status": "missing",
+      "status": "active",
       "evidence": [
         "environment/README.md",
         "environment/toolchain-lock.yaml",
@@ -52,7 +52,7 @@
     {
       "id": "C1-04",
       "name": "Mesh strategy verified",
-      "status": "missing",
+      "status": "active",
       "evidence": [
         "cfd/mesh-strategy.md",
         "reports/generated/mesh-quality.csv",

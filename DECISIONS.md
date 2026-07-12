@@ -9,3 +9,5 @@
 | D-005 | Reduced-order model is pipeline/screening only | accepted | model limitations | never promoted to CFD evidence |
 | D-006 | One-way Lagrangian particle route is initial CFD candidate | proposed | dilute stormwater screening logic | sensitivity or accounting fails |
 | D-007 | Fixed passive/no-energy constraint | fixed | product thesis | explicit product-boundary change |
+| D-008 | Freeze current YAML only as the generic C1 demo envelope | accepted | C1-01 independent audit | approved MFT/product inputs arrive |
+| D-009 | Pin Ubuntu package versions as the initial reproducibility route | accepted | passing toolchain smoke and negative control | package route becomes unavailable or solver sensitivity requires another distribution |

@@ -2,11 +2,11 @@
 
 | Order | Transition | Criteria | State |
 |---:|---|---|---|
-| 1 | Establish executable surrogate and gate truth | all | ACTIVE |
-| 2 | Freeze D1600 design envelope, objectives and constraints | C1-01, C1-12 | TODO |
-| 3 | Pin/install toolchain and run smoke cases | C1-02 | TODO |
-| 4 | Generate and validate generic D1600 geometry family | C1-03 | TODO |
-| 5 | Create mesh strategy and three mesh levels | C1-04 | TODO |
+| 1 | Establish executable surrogate and gate truth | all | DONE |
+| 2 | Freeze generic D1600 demo envelope, objectives and constraints | C1-01 | DONE |
+| 3 | Pin/install toolchain and run smoke cases | C1-02 | DONE |
+| 4 | Generate and validate generic D1600 geometry family | C1-03 | ACTIVE |
+| 5 | Create mesh strategy and three mesh levels | C1-04 | ACTIVE |
 | 6 | Verify baseline hydraulics across flow points | C1-05 | TODO |
 | 7 | Verify particle injection, accounting and interactions | C1-06 | TODO |
 | 8 | Produce grade-efficiency envelope | C1-07 | TODO |
